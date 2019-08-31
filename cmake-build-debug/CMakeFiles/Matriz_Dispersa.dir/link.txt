@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Matriz_Dispersa.dir/main.cpp.o  -o Matriz_Dispersa 

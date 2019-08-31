@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lica-pc/Desktop/2019-2/Matriz_Dispersa/Matriz.cpp
+Matriz.h
+/home/lica-pc/Desktop/2019-2/Matriz_Dispersa/Matriz.h
+
+/home/lica-pc/Desktop/2019-2/Matriz_Dispersa/Matriz.h
+
+/home/lica-pc/Desktop/2019-2/Matriz_Dispersa/main.cpp
+iostream
+-
+cassert
+-
+Matriz.cpp
+/home/lica-pc/Desktop/2019-2/Matriz_Dispersa/Matriz.cpp
+
