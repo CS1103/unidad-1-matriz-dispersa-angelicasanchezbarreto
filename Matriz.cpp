@@ -1,5 +1,6 @@
 #include "Matriz.h"
 #include "iostream"
+#include "exception"
 
 using namespace std;
 
@@ -10,7 +11,18 @@ Matriz::Matriz(): matriz{nullptr}, filas {0}, columnas{0} {
 
 // Crear matriz
 Matriz::Matriz(int f, int c): filas {f}, columnas{c} {
+    try{
+        if(filas != columnas)
+        {
+            throw  (std::exception());
+        }
+    }
 
+    catch (exception e) {
+
+        cout << "ERROR: " << e.what() <<endl;
+
+    }
     matriz = new int*[filas];
     for (int i= 0 ; i < filas; i++){
         matriz[i] = new int[columnas];
@@ -22,37 +34,57 @@ Matriz::Matriz(int f, int c): filas {f}, columnas{c} {
 // Llenar matriz
 void Matriz::llenar(){
 
-    int mult = filas*columnas;
-    if(mult%2==0) { //par
-        for (int k = 0; k < (mult/ 2) + 1; k++) {
-            int m = (rand() % 8) + 1;
-            long f,c;
-            f = random()%(filas);
-            c = random()%(columnas);
-            if( matriz[f][c] == 0)
-                matriz[f][c] = m;
-            else
-                k--;
+    try {
+        if (filas != columnas) {
+            throw (std::exception());
+        } else {
+            int mult = filas * columnas;
+            if (mult % 2 == 0) { //par
+                for (int k = 0; k < (mult / 2) + 1; k++) {
+                    int m = (rand() % 8) + 1;
+                    long f, c;
+                    f = random() % (filas);
+                    c = random() % (columnas);
+                    if (matriz[f][c] == 0)
+                        matriz[f][c] = m;
+                    else
+                        k--;
+                }
+            }
+            else { //impar
+                for (int k = 0; k < ((mult-1)/ 2) + 1; k++) {
+                    long f,c;
+                    int m = (rand() % 8) + 1;
+                    f = random()%(filas);
+                    c = random()%(columnas);
+                    if( matriz[f][c] == 0)
+                        matriz[f][c] = m;
+                    else
+                        k--;
+                }
+            }
         }
     }
-    else { //impar
-        for (int k = 0; k < ((mult-1)/ 2) + 1; k++) {
-            long f,c;
-            int m = (rand() % 8) + 1;
-            f = random()%(filas);
-            c = random()%(columnas);
-            if( matriz[f][c] == 0)
-                matriz[f][c] = m;
-            else
-                k--;
-        }
+    catch (exception e) {
+
+        cout << "ERROR: " << e.what() << endl;
     }
+
 }
 
 
 // Imprimir matriz
 void Matriz::imprimir(){
+    try{
+        if(filas != columnas)
+        {
+            throw  (std::exception());
+        }
+    }
 
+    catch (exception e) {
+        cout << "ERROR: " << e.what()<<endl;
+    }
   for ( int i = 0; i < filas; i++) {
     for (int j = 0; j < columnas; j++) {
       cout<<matriz[i][j]<<"  ";
@@ -98,17 +130,13 @@ Matriz Matriz::operator+(const Matriz& M1){
 }
 
 // Sobrecarga operador * (multiplicacion)
-Matriz Matriz::operator*(const Matriz& M1){
-
-    Matriz temporal(M1);
-    for(int i = 0; i < M1.filas; i++){
-        for(int j = 0; j < M1.columnas; ++j){
-            for(int z=0; z < this->columnas; ++z){
-                temporal.matriz[i][j] += this->matriz[i][z] * this->matriz[z][j];
-              }
-            }
-          }
-    return temporal;
+Matriz Matriz::operator*(const Matriz &M){
+    auto temp=new Matriz(filas,columnas);
+    for(int i=0; i<filas; ++i)
+        for(int j=0; j<columnas; ++j)
+            for(int z=0; z<columnas; ++z)
+                temp->matriz[i][j] += this->matriz[i][z] * M.matriz[z][j];
+    return *temp;
 }
 
 // Sobrecarga operador =

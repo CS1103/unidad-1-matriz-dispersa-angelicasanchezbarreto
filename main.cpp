@@ -5,49 +5,93 @@ using namespace std;
 
 int main() {
     srand(time(nullptr));
+    cout<< "OPERACIONES CON MATRICES CUADRADAS"<<endl;
     int filas, columnas;
-    cout<<"Ingresa la dimension: ";
+    cout<<"Ingresa las filas: ";
     cin>>filas;
-    columnas=filas;
-
-    auto M1=new Matriz(filas,columnas);
-    auto M2=new Matriz(filas,columnas);
-    auto M3=new Matriz(filas,columnas);
-    auto M4= new Matriz(filas,columnas);
-    auto M5=new Matriz(filas,columnas);
-    auto M6= new Matriz(filas,columnas);
+    cout<<"Ingresa las columnas: ";
+    cin >> columnas;
 
 
-    M1->llenar();
-    cout << "Matriz 1: " << '\n';
-    M1->imprimir();
-    cout <<endl;
+    if (filas == columnas) {
 
-    M2->llenar();
-    cout << "Matriz 2:" << '\n';
-    M2->imprimir();
-    cout <<endl;
+        auto M1=new Matriz(filas,columnas);
+        auto M2=new Matriz(filas,columnas);
+        auto Msuma=new Matriz(filas,columnas);
+        auto Mtrans=new Matriz(filas,columnas);
+        auto ME = new Matriz(filas,columnas);
 
-    *M3 = *M1 + *M2;//Sobrecarga operador +
-    cout << "La suma es: " << '\n';
-    M3->imprimir();
-    cout <<endl;
+        M1->llenar();
+        cout << "Matriz 1: " << '\n';
+        M1->imprimir();
+        cout << endl;
 
-    *M4 = *M1 * *M2; //Sobrecarga operador *
-    cout << "La multiplicacion es: " << '\n';
-    M4->imprimir();
-    cout <<endl;
 
-    M5->transposicion(*M1);
-    cout << "La transpuesta es: " << '\n';
-    M5->imprimir();
-    cout <<endl;
+        M2->llenar();
+        cout << "Matriz 2:" << '\n';
+        M2->imprimir();
+        cout << endl;
 
-    M6->escalar(*M1,5);
-    cout << "La mult escalar es: " << '\n';
-    M6->imprimir();
+        *Msuma = *M1 + *M2;//Sobrecarga operador +
 
-    delete M1;delete M2;delete M3;delete M4;delete M5;delete M6;
+        cout << "La suma de M1 y M2 es: " << '\n';
+        Msuma->imprimir();
+        cout << endl;
+
+
+        ME->escalar(*M1, 5);
+
+        cout << "La mult escalar M1 es: " << '\n';
+        ME->imprimir();
+
+
+        Mtrans->transposicion(*M1);
+
+        cout << "La transpuesta de M1 es: " << '\n';
+        Mtrans->imprimir();
+        cout << endl;
+
+
+        auto Mx = new Matriz(filas, columnas);
+        auto My = new Matriz(filas, columnas);
+
+
+        Mx->llenar();
+
+        cout << "Matriz x: " << '\n';
+        Mx->imprimir();
+        cout << endl;
+
+        My->llenar();
+        cout << "Matriz y:" << '\n';
+        My->imprimir();
+
+        cout << endl;
+
+
+        auto M_mult = new Matriz(filas, columnas);
+
+        *M_mult = *Mx * *My; //Sobrecarga operador *
+
+        cout << "La multiplicacion de Mx y My es: " << '\n';
+        M_mult->imprimir();
+        cout << endl;
+
+
+        delete M1;
+        delete M2;
+        delete Msuma;
+        delete Mtrans;
+        delete ME;
+        delete Mx;
+        delete My;
+        delete M_mult;
+    }
+
+    else {
+        cout << "ERROR: No es una matriz cuadrada";
+    }
     return 0;
+
 }
 
