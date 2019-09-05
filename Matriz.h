@@ -20,10 +20,8 @@ public:
     void transposicion(const Matriz&);
     Matriz operator +(const Matriz&);
     Matriz operator *(const Matriz&);
-    Matriz& operator =(const Matriz&);
+    Matriz operator =(const Matriz&);
 
-
-    Matriz(int i);
 };
 
 
