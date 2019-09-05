@@ -17,10 +17,7 @@ Matriz::Matriz(int f, int c): filas {f}, columnas{c} {
     }
 }
 
-// Destructor
-Matriz::~Matriz() {
-    //delete [] matriz;
-}
+// Destructor por defecto
 
 // Llenar matriz
 void Matriz::llenar(){

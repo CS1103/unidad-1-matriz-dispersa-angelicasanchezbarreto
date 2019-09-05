@@ -4,51 +4,50 @@
 using namespace std;
 
 int main() {
-
+    srand(time(nullptr));
     int filas, columnas;
-    cout<<"Ingresar filas: ";
+    cout<<"Ingresa la dimension: ";
     cin>>filas;
-    cout<<"Ingrese columnas: ";
-    cin>>columnas;
+    columnas=filas;
 
-    Matriz M1(filas,columnas);
-    Matriz M2(filas,columnas);
-    Matriz M3(filas,columnas);
-    Matriz M4(filas,columnas);
-    Matriz M5(filas,columnas);
-    Matriz M6(filas,columnas);
+    auto M1=new Matriz(filas,columnas);
+    auto M2=new Matriz(filas,columnas);
+    auto M3=new Matriz(filas,columnas);
+    auto M4= new Matriz(filas,columnas);
+    auto M5=new Matriz(filas,columnas);
+    auto M6= new Matriz(filas,columnas);
 
 
-    M1.llenar();
+    M1->llenar();
     cout << "Matriz 1: " << '\n';
-    M1.imprimir();
+    M1->imprimir();
     cout <<endl;
 
-    M2.llenar();
+    M2->llenar();
     cout << "Matriz 2:" << '\n';
-    M2.imprimir();
+    M2->imprimir();
     cout <<endl;
 
-    M3 = M1 + M2;//Sobrecarga operador +
+    *M3 = *M1 + *M2;//Sobrecarga operador +
     cout << "La suma es: " << '\n';
-    M3.imprimir();
+    M3->imprimir();
     cout <<endl;
 
-    M4 = M1 * M2; //Sobrecarga operador *
+    *M4 = *M1 * *M2; //Sobrecarga operador *
     cout << "La multiplicacion es: " << '\n';
-    M4.imprimir();
+    M4->imprimir();
     cout <<endl;
 
-    M5.transposicion(M1);
+    M5->transposicion(*M1);
     cout << "La transpuesta es: " << '\n';
-    M5.imprimir();
+    M5->imprimir();
     cout <<endl;
 
-    M6.escalar(M1,5);
+    M6->escalar(*M1,5);
     cout << "La mult escalar es: " << '\n';
-    M6.imprimir();
+    M6->imprimir();
 
-
+    delete M1;delete M2;delete M3;delete M4;delete M5;delete M6;
     return 0;
 }
 
