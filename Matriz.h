@@ -16,7 +16,6 @@ public:
 
     void llenar();   // 1. Necesitamos llenar la matriz
     void imprimir(); // 2. Necesitamos imprimir la matriz
-    void multiplicar(const Matriz&, const Matriz&);
     void escalar(const Matriz&, int);
     void transposicion(const Matriz&);
     Matriz operator +(const Matriz&);

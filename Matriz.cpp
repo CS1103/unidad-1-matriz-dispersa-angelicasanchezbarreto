@@ -1,4 +1,5 @@
 #include "Matriz.h"
+#include "iostream"
 
 using namespace std;
 
@@ -9,8 +10,6 @@ Matriz::Matriz(): matriz{nullptr}, filas {0}, columnas{0} {
 
 // Crear matriz
 Matriz::Matriz(int f, int c): filas {f}, columnas{c} {
-
-
     matriz = new int*[filas];
     for (int i= 0 ; i < filas; i++)
     {
@@ -20,20 +19,40 @@ Matriz::Matriz(int f, int c): filas {f}, columnas{c} {
 
 // Destructor
 Matriz::~Matriz() {
-
+    delete [] matriz;
 }
 
-// Llenar matriz (por ahora se va a llenar sin dispersion para probar si funciona)
+// Llenar matriz
 void Matriz::llenar(){
-
-  for ( int i = 0; i < filas; i++) {
-      for (int j = 0; j < columnas; j++) {
-          std::cout << "["<<i<<"]"<<"["<<j<<"]";
-          std::cin >> matriz[i][j];
+    int mult = filas*columnas;
+    if(mult%2==0) { //par
+        for (int k = 0; k < (mult/ 2) + 1; k++) {
+            int m = (rand() % 8) + 1;
+            long f,c;
+            f = random()%(filas);
+            c = random()%(columnas);
+            if( matriz[f][c] == 0)
+                matriz[f][c] = m;
+            else
+                k--;
+        }
     }
-  }
-
+    else { //impar
+        for (int k = 0; k < ((mult-1)/ 2) + 1; k++) {
+            long f,c;
+            int m = (rand() % 8) + 1;
+            f = random()%(filas);
+            c = random()%(columnas);
+            if( matriz[f][c] == 0)
+                matriz[f][c] = m;
+            else
+                k--;
+        }
+    }
 }
+
+
+
 
 // Imprimir matriz
 void Matriz::imprimir(){
@@ -47,12 +66,6 @@ void Matriz::imprimir(){
 
 }
 
-// Multiplicar matrices
-void Matriz::multiplicar(const Matriz &, const Matriz &) {
-
-
-
-}
 
 // Producto Punto
 void Matriz::escalar(const Matriz& M1, int num) {
